@@ -15,7 +15,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 
-set tags=../tags,tags
+set tags=../tags,./tags;,tags
 let &path.=".,/usr/include/**/*,/home/mj/workbench/embedded/**/*"
 
 set expandtab
@@ -84,9 +84,12 @@ let g:airline_symbols.space = "\ua0"
 
 autocmd BufWritePost *.cpp exe ":UpdateTags"
 
+" location of the zettelkasten
 let g:zettelkasten = "~/Documents/00_notes/"
+
+" create a new zettel with the timestamp and name
 command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
-nnoremap <leader>nz :NewZettel 
+nnoremap <leader>nnz :NewZettel 
 
 function! HandleFZF(file)
   "let filename = fnameescape(fnamemodify(a:file, ":t"))
@@ -101,4 +104,15 @@ endfunction
 
 command! -nargs=1 HandleFZF :call HandleFZF(<f-args>)
 command! -nargs=1 InsertZettel :call fzf#run({'sink': 'HandleFZF'})
-nnoremap <leader>iz :InsertZettel
+
+" insert link to zettel that can be selected via fzf
+nnoremap <leader>niz :InsertZettel
+
+" generate ctags in current directory
+nnoremap <leader>tt :silent !ctags -R . <CR>:redraw!<CR>
+
+" go to the index directory of the notes -> see zettelkasten variable for
+" directory
+nnoremap <leader>ni :execute ":e" zettelkasten . "/index.md"<CR>:cd ":e" zettelkasten<CR>
+
+
