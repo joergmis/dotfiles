@@ -14,6 +14,7 @@ set smarttab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+set colorcolumn=80
 
 set tags=../tags,./tags;,tags
 let &path.=".,/usr/include/**/*,/home/mj/workbench/embedded/**/*"
@@ -85,7 +86,7 @@ let g:airline_symbols.space = "\ua0"
 autocmd BufWritePost *.cpp exe ":UpdateTags"
 
 " location of the zettelkasten
-let g:zettelkasten = "~/workbench/website/"
+let g:zettelkasten = "~/workbench/website/content/zettelkasten/"
 
 " create a new zettel with the timestamp and name
 command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
