@@ -1,5 +1,16 @@
 # dotfiles
 
+## Dependencies
+
+```
+$ dnf install -y \
+  vim \
+  tmux \
+  ctags \
+  fzf \
+  the_silver_searcher
+```
+
 ## Vim
 
 - [vim-plug](https://github.com/junegunn/vim-plug)
