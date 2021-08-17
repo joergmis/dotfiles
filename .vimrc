@@ -85,7 +85,7 @@ let g:airline_symbols.space = "\ua0"
 autocmd BufWritePost *.cpp exe ":UpdateTags"
 
 " location of the zettelkasten
-let g:zettelkasten = "~/Documents/00_notes/"
+let g:zettelkasten = "~/workbench/website/"
 
 " create a new zettel with the timestamp and name
 command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
