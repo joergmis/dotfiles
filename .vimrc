@@ -15,6 +15,7 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set colorcolumn=80
+filetype indent on
 
 set tags=../tags,./tags;,tags
 let &path.=".,/usr/include/**/*,/home/mj/workbench/embedded/**/*"
