@@ -8,6 +8,8 @@ $ dnf install -y \
   tmux \
   ctags \
   fzf \
+  icat \
+  librsvg2-tools \
   the_silver_searcher
 ```
 

@@ -90,17 +90,19 @@ autocmd BufWritePost *.cpp exe ":UpdateTags"
 let g:zettelkasten = "~/workbench/website/content/zettelkasten/"
 
 " create a new zettel with the timestamp and name
-command! -nargs=1 NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
+command! -nargs=1 NewZettel :execute ":! hugo new" zettelkasten . strftime("%Y%m%d%H%M") . "-<args>.md"
 nnoremap <leader>nnz :NewZettel 
 
 function! HandleFZF(file)
-  "let filename = fnameescape(fnamemodify(a:file, ":t"))
-  "why only the tail ?  I believe the whole filename must be linked
-  "unless everything is flat ...
-  let filename = fnameescape(a:file)
-  let filename_wo_timestamp = fnameescape(fnamemodify(a:file, ":t:s/^[0-9]*-//"))
-  "Insert the markdown link to the file in the current buffer
-  let mdlink = "[ ".filename_wo_timestamp." ]( ".filename." )"
+  " make path hugo-ready
+  let filename = fnameescape(fnamemodify(a:file, ":gs?content??:gs?.md??"))
+
+  " get the title
+  let command = 'cat ' . a:file . " | grep title | cut -d '\"' -f2"
+  let title = trim(system(command))
+
+  " put them together
+  let mdlink = "[ ".title." ]( ".filename." )"
   put=mdlink
 endfunction
 
